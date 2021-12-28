@@ -77,6 +77,9 @@ public class StudentsRegistrationFormTests {
 
         $("#submit").click();
 
-        // todo Asserts
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $(".table-responsive").shouldHave(text("Alex Egorov"), text("alex@egorov.com"));
+        $(".table-responsive").$(byText("Student Name"))
+                .parent().shouldHave(text("Alex Egorov"));
     }
 }
