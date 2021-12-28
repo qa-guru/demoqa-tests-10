@@ -1,19 +1,19 @@
 package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byValue;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static guru.qa.tests.TestData.userEmail;
 
-public class StudentsRegistrationFormTests {
+public class StudentsRegistrationFormWithTestDataTests {
+
+    String firstName = "Alex",
+            lastName = "Egorov";
 
     @BeforeAll
     static void setUp() {
@@ -26,9 +26,9 @@ public class StudentsRegistrationFormTests {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Egorov");
-        $("#userEmail").setValue("alex@egorov.com");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Other")).click();
         $("#userNumber").setValue("1231231230");
         $("#dateOfBirthInput").click();
@@ -47,6 +47,6 @@ public class StudentsRegistrationFormTests {
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name"))
-                .parent().shouldHave(text("Alex Egorov"));
+                .parent().shouldHave(text(firstName + " " + lastName));
     }
 }
